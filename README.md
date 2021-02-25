@@ -1,4 +1,4 @@
-#Issues with logback logstash encoder
+# Issues with logback logstash encoder
 This repository is to demonstrate a problem I have with logback and the logstash encoder. Under certain circumstances
  logmessages are lost.
  
