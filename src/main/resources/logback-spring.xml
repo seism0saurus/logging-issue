@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%highlight(%-5level) %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>logstash:9000</destination>
+    <keepAliveDuration>5 minutes</keepAliveDuration>
+    <listener class="net.logstash.logback.appender.listener.FailureSummaryLoggingAppenderListener"/>
+
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <mdc/>
+        <context/>
+        <version/>
+        <logLevel/>
+        <logLevelValue/>
+        <loggerName/>
+
+        <pattern>
+          <pattern>
+            {
+            "serviceName": "logging-issue",
+            "environment": "dev",
+            "errorMessage": "%ex{0}"
+            }
+          </pattern>
+        </pattern>
+
+        <threadName/>
+        <message/>
+        <logstashMarkers/>
+        <arguments/>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+
+  <appender name="nc" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>localhost:8081</destination>
+    <keepAliveDuration>5 minutes</keepAliveDuration>
+    <listener class="net.logstash.logback.appender.listener.FailureSummaryLoggingAppenderListener"/>
+
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <mdc/>
+        <context/>
+        <version/>
+        <logLevel/>
+        <logLevelValue/>
+        <loggerName/>
+
+        <pattern>
+          <pattern>
+            {
+            "serviceName": "logging-issue",
+            "environment": "dev",
+            "errorMessage": "%ex{0}"
+            }
+          </pattern>
+        </pattern>
+
+        <threadName/>
+        <message/>
+        <logstashMarkers/>
+        <arguments/>
+        <stackTrace/>
+      </providers>
+    </encoder>
+  </appender>
+
+  <root level="WARN">
+    <appender-ref ref="console"/>
+    <appender-ref ref="stash"/>
+    <appender-ref ref="nc"/>
+  </root>
+</configuration>
