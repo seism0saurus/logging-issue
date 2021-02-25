@@ -8,7 +8,7 @@ This repository is to demonstrate a problem I have with logback and the logstash
  ### logstash
  Please set the destination of the logstash appender in line 10 in [logback-spring.xml](/src/main/resources/logback-spring.xml) to your logstash server.
  
- Our input rule is very simple:
+ Our input logstash server has a very simple input configuration:
  ```
 input {
     tcp {
