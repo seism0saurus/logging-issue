@@ -21,17 +21,18 @@ public class LoggingIssueApplication {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void testAppender() {
+    public void testAppender() throws InterruptedException {
 
         LOGGER.warn("1 - Log without marker and message as parameter: {}", MESSAGE);
 
         LogstashMarker payloadMarker = Markers.append("payload", MESSAGE);
         LOGGER.warn(payloadMarker, "2 - Log with payload marker without parameter");
-        //Comment message 3 to also remove messages 2-5?
-        LOGGER.warn(payloadMarker, "3 - Log with payload marker and payload as parameter: {}", payloadMarker);
-        LOGGER.warn(payloadMarker, "4 - Log with payload marker and message as parameter: {}", MESSAGE);
+        LOGGER.warn(payloadMarker, "3 - Log with payload marker and message as parameter: {}", MESSAGE);
 
         LogstashMarker rawMarker = Markers.appendRaw("raw", MESSAGE);
-        LOGGER.warn(rawMarker, "5 - Log with raw marker without parameter");
+        LOGGER.warn(rawMarker, "4 - Log with raw marker without parameter");
+
+        //Needed, so the loggers can finish their job before the application is shut down.
+        Thread.sleep(5000);
     }
 }

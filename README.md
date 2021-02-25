@@ -25,17 +25,11 @@ nc -Lp 8081
 
 ## Run
 Just start the application main class with your IDE.
-- In the output from the application I see the log messages 1-5.
-- In the output from netcat I see the log messages 1-5, too.
-- In kibana, that is connected to the elasticsearch cluster behind the logstash server, I see only log messages 1 and 5.
-
-If I comment out the line 31 in the [LoggingIssueApplication](/src/main/java/de/seism0saurus/loggingissue/LoggingIssueApplication.java) 
-(line after the comment) the behaviour changes in an unexpected way.
-- In the output from the application I see the log messages 1-5.
-- In the output from netcat I see only log message 1.
-- In kibana, that is connected to the elasticsearch cluster behind the logstash server, I see only log messages 1.
+- In the output from the application I see the log messages 1-4.
+- In the output from netcat I see the log messages 1-4, too.
+- In kibana, that is connected to the elasticsearch cluster behind the logstash server, I see only log messages 1 and 4.
 
 ## Questions
-- Why are log messages lost in the first case?
-- What happens in the second case, if I remove log message 3. Why does it affect even message 2, that should be
- logged before message 3?
+- Why are log messages lost?
+- Does it have something to do with the JSON and not using rar?
+- Do I have to test the content of my message to decide, if I need `append` or `appendRaw`?
