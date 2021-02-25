@@ -31,5 +31,5 @@ Just start the application main class with your IDE.
 
 ## Questions
 - Why are log messages lost?
-- Does it have something to do with the JSON and not using rar?
+- Does it have something to do with the JSON string and not using `appendRaw`?
 - Do I have to test the content of my message to decide, if I need `append` or `appendRaw`?
